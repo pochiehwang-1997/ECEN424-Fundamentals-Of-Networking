@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class MultithreadingMatrixMultiplication extends Thread {
     private int[][] arr1;
@@ -32,10 +33,11 @@ public class MultithreadingMatrixMultiplication extends Thread {
 
     public static void main(String[] args) {
         // Create arr 1
+        Random rand = new Random();
         int[][] arr1 = new int[20][20];
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
-                arr1[i][j] = 1;
+                arr1[i][j] =  rand.nextInt(10);
             }
         }
 
@@ -43,7 +45,7 @@ public class MultithreadingMatrixMultiplication extends Thread {
         int[][] arr2 = new int[20][20];
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
-                arr2[i][j] = 1;
+                arr2[i][j] = rand.nextInt(10);
             }
         }
 
