@@ -25,10 +25,6 @@ public class MultithreadingMatrixMultiplication extends Thread {
         }
     }
 
-    public int[][] getResult() {
-        return this.result;
-    }
-
     public static void main(String[] args) {
         // Create input array 1
         Random rand = new Random();
