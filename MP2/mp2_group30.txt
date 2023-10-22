@@ -1,7 +1,6 @@
 // Group 30: Raymond Vo, Po-Chieh Wang
 import java.util.Arrays;
 import java.util.Random;
-
 public class MultithreadingMatrixMultiplication extends Thread {
     private int[][] arr1;
     private int[][] arr2;
@@ -35,19 +34,8 @@ public class MultithreadingMatrixMultiplication extends Thread {
                 arr1[i][j] = rand.nextInt(10);
             }
         }
-
-        // Print out array 1
         System.out.println("Input array 1:");
-        for (int[] row : arr1) {
-            StringBuilder line = new StringBuilder();
-            for (int i = 0; i < row.length; i++) {
-                line.append(row[i]);
-                if (i < row.length - 1) {
-                    line.append(",");
-                }
-            }
-            System.out.println(line);
-        }
+        System.out.println(Arrays.deepToString(arr1));
 
         // Create input array 2
         int[][] arr2 = new int[20][20];
@@ -56,19 +44,8 @@ public class MultithreadingMatrixMultiplication extends Thread {
                 arr2[i][j] = rand.nextInt(10);
             }
         }
-        
-        // Print out array 2
         System.out.println("Input array 2:");
-        for (int[] row : arr2) {
-            StringBuilder line = new StringBuilder();
-            for (int i = 0; i < row.length; i++) {
-                line.append(row[i]);
-                if (i < row.length - 1) {
-                    line.append(",");
-                }
-            }
-            System.out.println(line);
-        }
+        System.out.println(Arrays.deepToString(arr2));
 
         // Create result and thread array
         int[][] ans = new int[20][20];
@@ -91,16 +68,7 @@ public class MultithreadingMatrixMultiplication extends Thread {
 
         // Print out result
         System.out.println("Result of multithreading:");
-        for (int[] row : ans) {
-            StringBuilder line = new StringBuilder();
-            for (int i = 0; i < row.length; i++) {
-                line.append(row[i]);
-                if (i < row.length - 1) {
-                    line.append(",");
-                }
-            }
-            System.out.println(line);
-        }
+        System.out.println(Arrays.deepToString(ans));
 
         // Calculate the result by single thread to validate the result of
         // multithreading
@@ -112,19 +80,8 @@ public class MultithreadingMatrixMultiplication extends Thread {
                 }
             }
         }
-
-        // Print out single threading result
         System.out.println("Result of singlethreading:");
-        for (int[] row : singleThreadResult) {
-            StringBuilder line = new StringBuilder();
-            for (int i = 0; i < row.length; i++) {
-                line.append(row[i]);
-                if (i < row.length - 1) {
-                    line.append(",");
-                }
-            }
-            System.out.println(line);
-        }
+        System.out.println(Arrays.deepToString(singleThreadResult));
 
         // Check if the result is correct
         System.out.println("Result of singlethreading is equal to result of multithreading: "
