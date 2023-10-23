@@ -12,7 +12,7 @@ class Server extends Thread {
     public boolean isRunning;
 
     public Server(Socket connectionSocket, int times, String sentenceToClient, int socketNum) {
-        this.isRunning = false;
+        this.isRunning = true;
         this.socketNum = socketNum;
         this.times = times;
         this.sentenceToClient = sentenceToClient;
@@ -21,7 +21,6 @@ class Server extends Thread {
 
     public void run() {
         try {
-            this.isRunning = true;
             DataOutputStream outToClient = new DataOutputStream(this.connectionSocket.getOutputStream());
             System.out.println("Socket " + this.socketNum + " created");
             for (int i = 0; i < this.times - 1; i++) {
@@ -59,23 +58,22 @@ class Server extends Thread {
 
         // Create array of sockets with maximum clients number
         Server[] servers = new Server[maxClients];
-        
+
         while (true) {
             Socket connectionSocket = welcomeSocket.accept();
             boolean isAvailable = false;
             int socketNum = 0;
-            while(!isAvailable){
-                for(int i = 0; i < maxClients; i++){
-                    if(servers[i] == null || servers[i].isRunning==false){
-                        socketNum = i;
+            // Only break the while loop when the number of clients does not reach maximum
+            while (!isAvailable) {
+                for (int i = 0; i < maxClients; i++) {
+                    if (servers[i] == null || servers[i].isRunning == false) {
+                        servers[i] = new Server(connectionSocket, times, sentenceToClient, socketNum);
+                        servers[i].start();
                         isAvailable = true;
                         break;
                     }
                 }
             }
-            servers[socketNum] = new Server(connectionSocket, times, sentenceToClient, socketNum);
-            servers[socketNum].start();
-
         }
 
     }
