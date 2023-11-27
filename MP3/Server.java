@@ -62,12 +62,11 @@ class Server extends Thread {
         while (true) {
             Socket connectionSocket = welcomeSocket.accept();
             boolean isAvailable = false;
-            int socketNum = 0;
             // Only break the while loop when the number of clients does not reach maximum
             while (!isAvailable) {
                 for (int i = 0; i < maxClients; i++) {
                     if (servers[i] == null || servers[i].isRunning == false) {
-                        servers[i] = new Server(connectionSocket, times, sentenceToClient, socketNum);
+                        servers[i] = new Server(connectionSocket, times, sentenceToClient, i);
                         servers[i].start();
                         isAvailable = true;
                         break;
